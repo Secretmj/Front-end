@@ -1,0 +1,208 @@
+<html>
+    <head>
+        <title>Clicker Cookie Game</title>
+    </head> 
+    <body>
+        <style>
+            .sectionleft {
+             float: left;
+             width: 80%;
+            }
+            .sectionright {
+             float: right;
+             width: 20%;
+            }
+            .scoreContainer{
+               background-color: rgb(238, 238, 238, 0.6); 
+               width: 50%;
+               padding: 10px;
+               border-radius: 10px;
+               font-size: 24px; 
+               font-weight: bold;
+ 
+            }
+ 
+             .clickercontainer img {
+                 position: relative;
+                 transition: all .2s ease-in-out;
+                
+             }
+ 
+             .clickercontainer img:hover { transform: scale(1.10);}
+             .clickercontainer img:active {transform: scale(0.99);}
+ 
+             .shopbutton {
+                 background-color: #b5b5b5;
+                 transition: all .2s ease-in-out;
+                 border-radius: 10px;
+                 width: 100%;
+                 margin: 10px 0px 10px 0px;
+             }
+ 
+             .shopbutton:hover{
+                 background-color: #c7c7c7;
+                 transition: all .2 ease-in-out;
+             }
+ 
+             .shopbutton #image {
+                 width: 25%;
+             }
+ 
+             .shopbuttonimg {
+                 height: 64px;
+                 width: 64px;
+             }
+
+             .shopbutton #nameandcost p {
+                margin: 0px;
+                width: 60%;
+             }
+
+             .shopbutton #nameandcost p:first-of-type {
+                font-size: 24px; 
+             }
+
+             .shopbutton #amount {
+                font-size: 48px;
+                color: #595959;
+                font-family: roboto;
+                width: 15%;
+             }
+
+             .sectionfooter {
+                margin-top: 20%;
+             }
+          
+             .unselectable {
+
+                user-select: none;
+             }
+
+         </style>
+        <div class="sectionleft">
+            <center>
+                <div class="scorecontainer unselectable">
+                    <span id = "score">0</span> Cookie<br>
+                    <span id="scorepersecond">0</span> Cookie per second
+                </div>
+                <br>
+                <div class="clickercontainer unselectable">
+                    <img src="cookie.jgp" height="265px" width="265px" onclick="addToScore(clickingPower)">
+                </div>
+            </center>
+
+        <div class="sectionfooter">
+             <h5>Cookie clicker</h5>
+        </div>
+        </div>
+
+        <div class="sectionright">
+           <table class="shopbutton unselectable" onclick="buycursor()">
+                <tr> 
+                   <td id="image"><img src="cursor.jgp"></td>  
+                   <td id="nameandcost">
+                       <p>cursor</p>
+                       <p><span id="cursorcost">15</span> cookie</p>
+                   </td>
+                   <td id="amount"><span id="cursors">0</span></td>
+                </tr>
+           </table>
+           <table class="shopbutton unselectable" onclick="buygrandma()">
+            <tr> 
+               <td id="image"><img src="grandma.jgp"></td>  
+               <td id="nameandcost">
+                   <p>grandma</p>
+                   <p><span id="grandmacost">100</span> cookie</p>
+               </td>
+               <td id="amount"><span id="grandmas">0</span></td>
+            </tr>
+            </table>
+            <table class="shopbutton unselectable" onclick="buyoven()">
+                <tr> 
+                   <td id="image"><img src="oven.jpeg"></td>  
+                   <td id="nameandcost">
+                       <p>oven</p>
+                       <p><span id="ovencost">1000</span> cookie</p>
+               </td>
+                <td id="amount"><span id="ovens">0</span></td>
+            </tr>
+            </table>
+        </div>
+
+
+        <script>
+            var score = 0;
+            var clickingPower = 2;
+
+            var cursorcost = 15;
+            var cursors = 0;
+            var Grandmacost = 100;
+            var grandmas = 0;
+            var ovencost = 1000;
+            var ovens = 0;
+
+            function buycursor(){
+                if (score >= cursorcost) {
+                    score = score - cursorcost;
+                    cursors = cursors + 1;
+                    cursorcost = Math.round(cursorcost * 1.15);
+                    
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("cursorcost").innerHTML = cursorcost;
+                    document.getElementById("cursors").innerHTML = cursors;
+                    updatescorepersecond();
+
+                }
+                }
+        
+                function buygrandma(){
+                if (score >= Grandmacost) {
+                    score = score - Grandmacost;
+                    grandmas = grandmas + 1;
+                    Grandmacost = Math.round(Grandmacost * 1.15);
+                    
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("grandmacost").innerHTML = Grandmacost;
+                    document.getElementById("grandmas").innerHTML = grandmas;
+                    updatescorepersecond();
+                }
+                }
+
+                function buyoven(){
+                if (score >= ovencost) {
+                    score = score - ovencost;
+                    ovens = ovens + 1;
+                    Grandmacost = Math.round(ovencost * 1.15);
+                    
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("ovencost").innerHTML = ovencost;
+                    document.getElementById("ovens").innerHTML = ovens;
+                    updatescorepersecond();
+
+                }
+                }
+                
+        function addToScore(amount) {
+        score = score + amount;
+        document.getElementById("score").innerHTML = score;
+        }
+
+        function updatescorepersecond() {
+            scorepersecond = cursors + grandmas * 5 + ovens * 70;
+            document.getElementById("scorepersecond").innerHTML = scorepersecond;
+        }
+
+       /* setInterval (function() {
+            score = score + amount;
+            score = score + grandmas * 5;
+            score = score + ovens * 70;
+            document.getElementById("score").innerHTML = score;
+
+    document.title = score + "cookie - cookie clicker"
+ },1000); // 1000ms = 1 second*/
+        </script>
+    </body>
+</html>
